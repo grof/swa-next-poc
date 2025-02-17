@@ -1,19 +1,25 @@
 "use client";
 
-import { unstable_noStore as noStore } from 'next/cache';
-
+import { useEffect, useState } from 'react';
 import styles from "./page.module.css";
 
-async function getUserInfo() {
-  const response = await fetch('/.auth/me');
-  const payload = await response.json();
-  const { clientPrincipal } = payload;
-  return clientPrincipal;
-}
+export default function LandingPage() {
+  const [userInfo, setUserInfo] = useState(null);
 
-export default async function LandingPage() {
-  noStore();
-  const userInfo = await getUserInfo();
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch('/.auth/me');
+        const payload = await response.json();
+        const { clientPrincipal } = payload;
+        setUserInfo(clientPrincipal);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
 
   return (
     <main className={styles.main}>
