@@ -1,5 +1,7 @@
 "use client";
 
+import { unstable_noStore as noStore } from 'next/cache';
+
 import styles from "./page.module.css";
 
 async function getUserInfo() {
@@ -10,6 +12,7 @@ async function getUserInfo() {
 }
 
 export default async function LandingPage() {
+  noStore();
   const userInfo = await getUserInfo();
 
   return (
