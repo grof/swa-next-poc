@@ -2,37 +2,7 @@
   "trailingSlash": "auto",
   "routes": [
     {
-      "route": "/home*",
-      "allowedRoles": [
-        "authenticated"
-      ]
-    },
-    {
-      "route": "/create*",
-      "allowedRoles": [
-        "authenticated"
-      ]
-    },
-    {
-      "route": "/items*",
-      "allowedRoles": [
-        "authenticated"
-      ]
-    },
-    {
       "route": "/library*",
-      "allowedRoles": [
-        "authenticated"
-      ]
-    },
-    {
-      "route": "/images/*",
-      "headers": {
-        "cache-control": "must-revalidate, max-age=15770000"
-      }
-    },
-    {
-      "route": "/api/*",
       "allowedRoles": [
         "authenticated"
       ]
@@ -58,18 +28,9 @@
     ]
   },
   "responseOverrides": {
-    "400": {
-      "rewrite": "/invalid-invitation-error.html"
-    },
     "401": {
       "redirect": "/login",
       "statusCode": 302
-    },
-    "403": {
-      "rewrite": "/custom-forbidden-page.html"
-    },
-    "404": {
-      "rewrite": "/404.html"
     }
   },
   "globalHeaders": {
