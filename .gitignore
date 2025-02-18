@@ -30,6 +30,7 @@ yarn-error.log*
 
 # local configuration files
 local.settings.json
+host.json
 
 # typescript
 *.tsbuildinfo
