@@ -11,8 +11,11 @@ export default function HomePage() {
   if (isLoading) {
     return (
       <main className={styles.main}>
-        <div className={styles.description}>
+        <div className={styles.topRow}>
           <h1>{PAGE_TITLE}</h1>
+          <p>Loading...</p>
+        </div>
+        <div className={styles.bottomRow}>
           <p>Loading...</p>
         </div>
       </main>

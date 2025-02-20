@@ -1,0 +1,33 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 70px;
+  background-color: #ECECEC;
+  color: #ffffff;
+  padding: 48px 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+}
+
+.link {
+  color: #333333;
+  text-decoration: none;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  width: 90%;
+  text-align: center;
+}
+
+.link:hover {
+  color: #0F5E88;
+}
+
+.active {
+  color: #0F5E88;
+}

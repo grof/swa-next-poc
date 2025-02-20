@@ -1,0 +1,9 @@
+.main {
+  padding: 48px 0 0 70px; /* Account for header height and nav width */
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.content {
+  padding: 2rem;
+}
