@@ -1,41 +1,55 @@
-import { headers } from 'next/headers';
+"use client";
+
 import styles from "./page.module.css";
+import { useUser } from '@/app/_hooks/useUser';
 
-interface User {
-  identityProvider: string;
-  userId: string;
-  userDetails: string;
-  userRoles: string[];
-}
+const PAGE_TITLE  = "Library";
 
-async function getUser(): Promise<User | null> {
-  const headersList = headers();
-  const user = headersList.get('x-ms-client-principal');
+export default function LibraryPage() {
+  const { user, isLoading, error } = useUser();
 
-  if (user) {
-    const decodedUser = JSON.parse(Buffer.from(user, 'base64').toString('utf-8'));
-    return decodedUser;
+  if (isLoading) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.description}>
+          <h1>{PAGE_TITLE}</h1>
+          <p>Loading...</p>
+        </div>
+      </main>
+    );
   }
 
-  return null;
-}
+  if (error) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.description}>
+          <h1>{PAGE_TITLE}</h1>
+          <p>Error: {error.message}</p>
+        </div>
+      </main>
+    );
+  }
 
-export default async function LibraryPage() {
-  const user = await getUser();
-
-  // if (!user) {
-  //   return <div>Please log in to view your profile</div>
-  // }
+  if (!user) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.description}>
+          <h1>{PAGE_TITLE}</h1>
+          <p>Please log in to view your profile</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <h1>Library</h1>
-        <p><strong>Provider:</strong> {user?.identityProvider}</p>
-        <p><strong>User ID:</strong> {user?.userId}</p>
-        <p><strong>User Details:</strong> {user?.userDetails}</p>
-        <p><strong>Roles:</strong> {user?.userRoles.join(', ')}</p>
-        <i>obtained from x-ms-client-principal header</i>
+        <h1>{PAGE_TITLE}</h1>
+        <p><strong>Provider:</strong> {user.identityProvider}</p>
+        <p><strong>User ID:</strong> {user.userId}</p>
+        <p><strong>User Details:</strong> {user.userDetails}</p>
+        <p><strong>Roles:</strong> {user.userRoles.join(', ')}</p>
+        <i>obtained from .auth/me</i>
       </div>
     </main>
   );
